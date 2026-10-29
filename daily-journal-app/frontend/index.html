@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#6759e8">
+  <title>Daybook — Daily Journal</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="Daybook home"><span class="brand-mark">d</span><span>daybook<span class="brand-dot">.</span></span></a>
+      <p class="side-label">WORKSPACE</p>
+      <nav class="side-nav" aria-label="Main navigation">
+        <button class="nav-item active" data-view="journal"><span>▤</span> My journal</button>
+        <button class="nav-item" data-view="insights"><span>◷</span> Reflections</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="privacy-card"><span class="privacy-icon">✦</span><strong>Your space, your story.</strong><p>A quiet place to collect your thoughts, one day at a time.</p></div>
+        <div class="profile"><div class="avatar">J</div><div><strong>My journal</strong><small>Personal space</small></div><span class="profile-menu">•••</span></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="mobile-brand"><span class="brand-mark">d</span> daybook<span class="brand-dot">.</span></div>
+        <div class="breadcrumb">Workspace <span>/</span> <strong id="crumb-title">My journal</strong></div>
+        <div class="top-actions"><span class="secure-label"><span class="secure-dot"></span> Private journal</span><button class="icon-btn" id="today-btn" title="Go to today" aria-label="Go to today">⌂</button></div>
+      </header>
+
+      <section class="content" id="journal-view">
+        <div class="welcome-row">
+          <div><p class="eyebrow" id="date-label">YOUR DAILY SPACE</p><h1>Make room for <span>your thoughts.</span></h1><p class="subtitle">A little reflection can make a big difference.</p></div>
+          <div class="date-pill"><span>◷</span><div><small>TODAY</small><strong id="today-date">—</strong></div></div>
+        </div>
+
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-top"><span class="stat-icon purple">✎</span><span class="stat-caption">ALL TIME</span></div><strong id="stat-total">—</strong><p>Journal entries</p></article>
+          <article class="stat-card"><div class="stat-top"><span class="stat-icon peach">♡</span><span class="stat-caption">YOUR MOOD</span></div><strong id="stat-mood">—</strong><p>Most used mood</p></article>
+          <article class="stat-card"><div class="stat-top"><span class="stat-icon mint">☼</span><span class="stat-caption">CONSISTENCY</span></div><strong id="stat-streak">—</strong><p>Day writing streak</p></article>
+        </div>
+
+        <div class="section-heading"><div><h2>Today's reflection</h2><p>Capture what matters to you today.</p></div><span class="autosave-note"><span class="secure-dot"></span> Saved to your database</span></div>
+        <div class="editor-card">
+          <div class="editor-top"><div class="editor-title"><span class="pen-icon">✎</span><div><strong id="editor-heading">A page for today</strong><small id="editor-subtitle">Your thoughts don't have to be perfect.</small></div></div><span class="entry-date" id="entry-date">TODAY</span></div>
+          <form id="entry-form">
+            <label for="entry-title">Give this entry a title <span>OPTIONAL</span></label>
+            <input id="entry-title" name="title" maxlength="120" placeholder="e.g. Small wins, big feelings..." autocomplete="off">
+            <label for="entry-content">What's on your mind?</label>
+            <textarea id="entry-content" name="content" rows="7" maxlength="12000" placeholder="Start wherever you are. What happened today? What did you learn? What are you grateful for?" required></textarea>
+            <div class="editor-bottom"><div class="mood-picker"><span class="mood-label">TODAY I FEEL</span><div class="mood-options" role="group" aria-label="Choose today's mood">
+              <button type="button" class="mood-option selected" data-mood="Calm" aria-pressed="true"><span>😌</span> Calm</button>
+              <button type="button" class="mood-option" data-mood="Happy" aria-pressed="false"><span>😊</span> Happy</button>
+              <button type="button" class="mood-option" data-mood="Grateful" aria-pressed="false"><span>💛</span> Grateful</button>
+              <button type="button" class="mood-option" data-mood="Anxious" aria-pressed="false"><span>🌧️</span> Anxious</button>
+              <button type="button" class="mood-option" data-mood="Tired" aria-pressed="false"><span>😴</span> Tired</button>
+            </div></div><button class="primary-btn" id="save-btn" type="submit"><span>↗</span> Save entry</button></div>
+            <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+
+        <div class="section-heading recent-heading"><div><h2>Recent pages</h2><p>Your story, one entry at a time.</p></div><div class="search-box"><span>⌕</span><input id="search-input" placeholder="Search entries..." aria-label="Search entries"></div></div>
+        <div id="entries-list" class="entries-list"><div class="loading-state">Loading your journal…</div></div>
+      </section>
+
+      <section class="content hidden" id="insights-view">
+        <div class="welcome-row"><div><p class="eyebrow">LOOKING BACK</p><h1>Your moments, <span>in perspective.</span></h1><p class="subtitle">Notice the little patterns in your days.</p></div></div>
+        <div class="stats-grid"><article class="stat-card"><div class="stat-top"><span class="stat-icon purple">✎</span><span class="stat-caption">TOTAL PAGES</span></div><strong id="insight-total">0</strong><p>Entries written</p></article><article class="stat-card"><div class="stat-top"><span class="stat-icon peach">♡</span><span class="stat-caption">COMMON MOOD</span></div><strong id="insight-mood">—</strong><p>Most recorded mood</p></article><article class="stat-card"><div class="stat-top"><span class="stat-icon mint">▦</span><span class="stat-caption">THIS MONTH</span></div><strong id="insight-month">0</strong><p>Pages this month</p></article></div>
+        <div class="editor-card reflection-card"><span class="stat-icon purple">✧</span><h2>Every entry counts.</h2><p>Journaling isn't about writing something amazing every day. It's about making a little time to hear yourself. Keep showing up for your own story.</p><button class="primary-btn" id="back-to-write">Write today's entry</button></div>
+      </section>
+      <footer>Made for the moments that make you, you. <span>Daybook © <span id="year"></span></span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <dialog id="delete-dialog" class="confirm-dialog"><form method="dialog"><span class="dialog-icon">!</span><h2>Delete this page?</h2><p>This journal entry will be permanently deleted. This action can't be undone.</p><div class="dialog-actions"><button class="secondary-btn" value="cancel">Keep entry</button><button class="danger-btn" id="confirm-delete" value="confirm">Delete entry</button></div></form></dialog>
+</body>
+</html>
